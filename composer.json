@@ -1,0 +1,45 @@
+{
+  "name": "webandwork/contao-cleverreach-connector-bundle",
+  "type": "contao-bundle",
+  "description": "Connects Contao Newsletterengine to Cleverreach",
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "webandwork",
+      "homepage": "https://github.com/webandwork"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "contao/core-bundle": "^4.9"
+  },
+  "conflict": {
+    "contao/core": "*",
+    "contao/manager-plugin": "<2.0 || >=3.0"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.0",
+    "friendsofphp/php-cs-fixer": "^2.12",
+    "php-http/guzzle6-adapter": "^1.1",
+    "php-http/message-factory": "^1.0.2",
+    "phpunit/phpunit": "^5.7.26",
+    "symfony/phpunit-bridge": "^3.2"
+  },
+  "extra": {
+    "contao-manager-plugin": "Vrpayment\\ContaoIntranetBundle\\ContaoManager\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Vrpayment\\ContaoIntranetBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Vrpayment\\ContaoIntranetBundle\\Tests\\": "tests/"
+    }
+  },
+  "support": {
+    "issues": "https://github.com/vrpayment/issues",
+    "source": "https://github.com/vrpayment"
+  }
+}
