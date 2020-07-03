@@ -26,20 +26,20 @@
     "symfony/phpunit-bridge": "^3.2"
   },
   "extra": {
-    "contao-manager-plugin": "Vrpayment\\ContaoIntranetBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "Webandwork\\ContaoCleverreachConnectorBundle\\ContaoManager\\Plugin"
   },
   "autoload": {
     "psr-4": {
-      "Vrpayment\\ContaoIntranetBundle\\": "src/"
+      "Webandwork\\ContaoCleverreachConnectorBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Vrpayment\\ContaoIntranetBundle\\Tests\\": "tests/"
+      "Webandwork\\ContaoCleverreachConnectorBundle\\Tests\\": "tests/"
     }
   },
   "support": {
-    "issues": "https://github.com/vrpayment/issues",
-    "source": "https://github.com/vrpayment"
+    "issues": "https://github.com/webandwork/contao-cleverreach-connector/issues",
+    "source": "https://github.com/webandwork/contao-cleverreach-connector"
   }
 }

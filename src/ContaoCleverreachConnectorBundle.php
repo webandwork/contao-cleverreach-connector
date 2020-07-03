@@ -12,7 +12,9 @@
 namespace Webandwork\ContaoCleverreachConnectorBundle;
 
 
-class ContaoCleverreachConnectorBundle
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class ContaoCleverreachConnectorBundle extends Bundle
 {
 
 }
