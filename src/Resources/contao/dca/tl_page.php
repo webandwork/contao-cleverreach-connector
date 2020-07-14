@@ -10,6 +10,11 @@
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
+/*
+ * Callback
+ */
+$GLOBALS['TL_DCA']['tl_page']['config']['onsubmit_callback'][] = ['Webandwork\ContaoCleverreachConnectorBundle\ContaoBackend\Callback', 'getCleverreachToken'];
+
 /**
  * Extend Pallettes.
  */
