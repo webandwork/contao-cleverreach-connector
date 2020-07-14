@@ -4,5 +4,5 @@ services:
         autoconfigure: true
         public: true
 
-    Webandwork\ContaoCleverreachConnectorBundle\ContaoBackend\Callback:
+    Webandwork\ContaoCleverreachConnectorBundle\Api\ApiManager:
         public: true

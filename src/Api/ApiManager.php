@@ -14,9 +14,9 @@ namespace Webandwork\ContaoCleverreachConnectorBundle\Api;
 
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
+use Webandwork\ContaoCleverreachConnectorBundle\Api\Http\Guzzle;
 
-class ApiManagerFactory
+class ApiManager
 {
     /**
      * @var Connection
@@ -33,8 +33,15 @@ class ApiManagerFactory
         $this->cleverreachConnectLogger = $cleverreachConnectLogger;
     }
 
-    public function log()
+    public function getAccessToken(string $clientId, string $clientSecret)
     {
-        $this->cleverreachConnectLogger->log(LogLevel::ERROR, 'Test');
+        /** @var Guzzle $client */
+        $client = new Guzzle($this->cleverreachConnectLogger);
+
+        $response = $client->authorize($clientId, $clientSecret);
+
+        dump($response); exit;
+
     }
+
 }
