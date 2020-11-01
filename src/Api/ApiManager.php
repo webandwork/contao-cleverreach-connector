@@ -38,10 +38,15 @@ class ApiManager
         /** @var Guzzle $client */
         $client = new Guzzle($this->cleverreachConnectLogger);
 
+        /** @var array $response */
         $response = $client->authorize($clientId, $clientSecret);
 
-        dump($response); exit;
+        if($response['access_token'])
+        {
+            return $response['access_token'];
+        }
 
+        return null;
     }
 
 }

@@ -38,13 +38,14 @@ class Callback extends Backend
             return;
         }
 
+        /** @var string|null $accessToken */
+        $accessToken = $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
 
-
-        $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
-
-        dump($page); exit;
-
-
+        if(null !== $accessToken)
+        {
+            $page->cleverreachConnectToken = $accessToken;
+            $page->save();
+        }
     }
 
 }
