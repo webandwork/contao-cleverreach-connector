@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\Service;
-
 
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\PageModel;
@@ -37,17 +36,11 @@ class ReceiverManager
         $this->framework = $framework;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param string $token
-     */
     public function setToken(string $token): void
     {
         $this->token = $token;
@@ -79,12 +72,12 @@ class ReceiverManager
     public function addRecipient(string $email, int $groupId)
     {
         $channel = \NewsletterChannelModel::findById($groupId);
-        $this->apiManager->createNewReceiver($this->getToken(), (int)$channel->cleverreachConnectGroupId, $email);
+        $this->apiManager->createNewReceiver($this->getToken(), (int) $channel->cleverreachConnectGroupId, $email);
     }
 
     public function removeRecipient(string $email, int $groupId)
     {
         $channel = \NewsletterChannelModel::findById($groupId);
-        $this->apiManager->removeReceiver($this->getToken(), (int)$channel->cleverreachConnectGroupId, $email);
+        $this->apiManager->removeReceiver($this->getToken(), (int) $channel->cleverreachConnectGroupId, $email);
     }
 }

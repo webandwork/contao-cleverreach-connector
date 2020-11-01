@@ -1,13 +1,13 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
- *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
- *
- * @license    commercial
- * @author     Holger Neuner
- */
 
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
+ *
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
+ *
+ * @license LGPL-3.0-or-later
+ */
 
 namespace Webandwork\ContaoCleverreachConnectorBundle\EventListener;
 
@@ -31,12 +31,10 @@ class RemoveRecipientListener
 
     public function __invoke(string $email, array $channels): void
     {
-        foreach($channels as $id)
-        {
+        foreach ($channels as $id) {
             $token = $this->receiverManager->getTokenFromChannelRelatedPageId($id);
 
-            if(null === $token)
-            {
+            if (null === $token) {
                 return;
             }
 

@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\EventListener;
-
 
 use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Webandwork\ContaoCleverreachConnectorBundle\Service\ReceiverManager;
@@ -32,12 +31,10 @@ class ActivateRecipientListener
 
     public function __invoke(string $email, array $recipientIds, array $channelIds): void
     {
-        foreach($channelIds as $id)
-        {
+        foreach ($channelIds as $id) {
             $token = $this->receiverManager->getTokenFromChannelRelatedPageId($id);
 
-            if(null === $token)
-            {
+            if (null === $token) {
                 return;
             }
 
