@@ -12,6 +12,10 @@ services:
     Webandwork\ContaoCleverreachConnectorBundle\Service\GroupManager:
         public: true
 
+    # Service Receiver Manager
+    Webandwork\ContaoCleverreachConnectorBundle\Service\ReceiverManager:
+        public: true
+
     # Service Token Cron
     Webandwork\ContaoCleverreachConnectorBundle\Cron\RefreshCleverreachTokenCron:
         tags:
@@ -24,4 +28,12 @@ services:
         class: Webandwork\ContaoCleverreachConnectorBundle\Command\ImportGroups
         arguments:
             - '@contao.framework'
+
+    # Hook Activate Recipient
+    Webandwork\ContaoCleverreachConnectorBundle\EventListener\ActivateRecipientListener:
+        public: true
+
+    # Hook Remove Recipient
+    Webandwork\ContaoCleverreachConnectorBundle\EventListener\RemoveRecipientListener:
+        public: true
 

@@ -103,4 +103,30 @@ class ApiManager
 
         return $entitiys;
     }
+
+    public function createNewReceiver(string $token, int $groupId, string $email)
+    {
+        $data = [
+            'email' => $email,
+            'activated' => time(),
+            'registered' => time(),
+            'deactivated' => 0,
+            'source' => 'CMS Contao',
+        ];
+
+        /** @var Guzzle $client */
+        $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => $token]);
+        $response = $client->action('POST', '/groups/'.$groupId.'/receivers', $data);
+
+        if (0 === \count($response)) {
+            return null;
+        }
+    }
+
+    public function removeReceiver(string $token, int $groupId, string $email)
+    {
+        /** @var Guzzle $client */
+        $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => $token]);
+        $client->action('DELETE', '/groups/'.$groupId.'/receivers/'.$email);
+    }
 }
