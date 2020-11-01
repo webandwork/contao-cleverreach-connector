@@ -38,9 +38,13 @@ class Callback extends Backend
             return;
         }
 
+        if('' !== $page->cleverreachConnectToken)
+        {
+            return;
+        }
+
         /** @var array $accessToken */
         $result = $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
-
 
         if($result['access_token'])
         {

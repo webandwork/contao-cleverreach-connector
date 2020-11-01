@@ -6,3 +6,10 @@ services:
 
     Webandwork\ContaoCleverreachConnectorBundle\Api\ApiManager:
         public: true
+
+    Webandwork\ContaoCleverreachConnectorBundle\Cron\RefreshCleverreachTokenCron:
+        tags:
+            -   name: contao.cronjob
+                interval: 0 */2 * * *
+                method: onEveryTwoHours
+
