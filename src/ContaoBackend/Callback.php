@@ -38,14 +38,23 @@ class Callback extends Backend
             return;
         }
 
-        /** @var string|null $accessToken */
-        $accessToken = $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
+        /** @var array $accessToken */
+        $result = $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
 
-        if(null !== $accessToken)
+
+        if($result['access_token'])
         {
-            $page->cleverreachConnectToken = $accessToken;
+            $page->cleverreachConnectToken = $result['access_token'];
+            $page->cleverreachConnectTokenExpiredAt = time() + (int)$result['expires_in'];
             $page->save();
         }
+    }
+
+    public function test()
+    {
+        /** @var ApiManager $apiManager */
+        //$apiManager = Controller::getContainer()->get('Webandwork\ContaoCleverreachConnectorBundle\Api\ApiManager');
+        //$apiManager->getGroups(); exit;
     }
 
 }

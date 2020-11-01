@@ -41,12 +41,15 @@ class ApiManager
         /** @var array $response */
         $response = $client->authorize($clientId, $clientSecret);
 
-        if($response['access_token'])
-        {
-            return $response['access_token'];
-        }
+        return $response;
+    }
 
-        return null;
+    public function getGroups()
+    {
+        /** @var Guzzle $client */
+        $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjIwMTYifQ.eyJpc3MiOiJyZXN0LmNsZXZlcnJlYWNoLmNvbSIsImlhdCI6MTYwNDIxNDc3NCwiZXhwIjoxNjA2ODA2Nzc0LCJjbGllbnRfaWQiOjg2MDg1LCJzaGFyZCI6InNoYXJkOCIsInpvbmUiOjIsInVzZXJfaWQiOjAsImxvZ2luIjoib2F1dGgtVzVWTlRISXRpYSIsInJvbGUiOiJ1c2VyIiwic2NvcGVzIjoib2FfYmFzaWMgb2FfcmVjZWl2ZXJzIG9hX21haWxpbmdzIG9hX3doaXRlbGFiZWwiLCJpbmRlbnRpZmllciI6InN5c3RlbSIsImNhbGxlciI6NX0.ogPgwyWo59ErsOBK5tx-J59R4Ve7yYyfFWHbqiu-jWc']);
+        $response = $client->action('GET', '/groups');
+        dump($response);
     }
 
 }

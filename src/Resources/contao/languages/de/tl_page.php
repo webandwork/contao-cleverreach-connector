@@ -17,3 +17,4 @@ $GLOBALS['TL_LANG']['tl_page']['cleverreachConnect'] = ['Cleverreach Connect akt
 $GLOBALS['TL_LANG']['tl_page']['cleverreachConnectClientId'] = ['Client ID', 'Tragen Sie hier die ClientID ein, welche Sie in Ihrem Kundenmenü bei Cleverreach via OaAuth-App erstellen können.'];
 $GLOBALS['TL_LANG']['tl_page']['cleverreachConnectClientSecret'] = ['Client Secret', 'Tragen Sie hier das Client Secret ein, welches Sie in Ihrem Kundenmenü bei Cleverreach via OaAuth-App erstellen können..'];
 $GLOBALS['TL_LANG']['tl_page']['cleverreachConnectToken'] = ['Token', 'Hier trägt das System den sogenannten Token ein. Diese Feld können Sie nicht editieren.'];
+$GLOBALS['TL_LANG']['tl_page']['cleverreachConnectTokenExpiredAt'] = ['Ablaufdatum Token', 'Wird per Cronjob jeweils erneuert.'];
