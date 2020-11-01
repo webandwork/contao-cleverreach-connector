@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\ContaoBackend;
-
 
 use Contao\Backend;
 use Contao\Controller;
@@ -28,37 +27,32 @@ class Callback extends Backend
         /** @var PageModel $page */
         $page = PageModel::findById($dataContainer->id);
 
-        if('root' !== $page->type)
-        {
+        if ('root' !== $page->type) {
             return;
         }
 
-        if('1' !== $page->cleverreachConnect)
-        {
+        if ('1' !== $page->cleverreachConnect) {
             return;
         }
 
-        if('' !== $page->cleverreachConnectToken)
-        {
+        if ('' !== $page->cleverreachConnectToken) {
             return;
         }
 
         /** @var array $accessToken */
         $result = $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
 
-        if($result['access_token'])
-        {
+        if ($result['access_token']) {
             $page->cleverreachConnectToken = $result['access_token'];
-            $page->cleverreachConnectTokenExpiredAt = time() + (int)$result['expires_in'];
+            $page->cleverreachConnectTokenExpiredAt = time() + (int) $result['expires_in'];
             $page->save();
         }
     }
 
     public function test()
     {
-        /** @var ApiManager $apiManager */
+        /* @var ApiManager $apiManager */
         //$apiManager = Controller::getContainer()->get('Webandwork\ContaoCleverreachConnectorBundle\Api\ApiManager');
         //$apiManager->getGroups(); exit;
     }
-
 }

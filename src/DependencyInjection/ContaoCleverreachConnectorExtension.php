@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\DependencyInjection;
-
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

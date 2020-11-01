@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\Api\Http;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -172,8 +171,6 @@ class Guzzle extends Client
     /**
      * Log message.
      *
-     * @param string $message
-     * @param array  $data
      * @param string $type
      */
     protected function log(string $message, array $data = [], $type = LogLevel::INFO)
@@ -185,8 +182,6 @@ class Guzzle extends Client
 
     /**
      * Configure defaults.
-     *
-     * @param array $config
      */
     private function configure(array $config)
     {

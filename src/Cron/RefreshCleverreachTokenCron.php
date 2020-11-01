@@ -1,13 +1,13 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
- *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
- *
- * @license    commercial
- * @author     Holger Neuner
- */
 
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
+ *
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
+ *
+ * @license LGPL-3.0-or-later
+ */
 
 namespace Webandwork\ContaoCleverreachConnectorBundle\Cron;
 
@@ -34,21 +34,17 @@ class RefreshCleverreachTokenCron
 
         $rootPages = PageModel::findPublishedRootPages();
 
-        if(null === $rootPages)
-        {
+        if (null === $rootPages) {
             return;
         }
 
         /** @var PageModel $rootPage */
-        foreach($rootPages as $rootPage)
-        {
-            if('1' !== $rootPage->cleverreachConnect)
-            {
+        foreach ($rootPages as $rootPage) {
+            if ('1' !== $rootPage->cleverreachConnect) {
                 continue;
             }
 
-            if('' === $rootPage->cleverreachConnectToken)
-            {
+            if ('' === $rootPage->cleverreachConnectToken) {
                 continue;
             }
 
@@ -61,18 +57,16 @@ class RefreshCleverreachTokenCron
         /** @var int $timeToExpired */
         $timeToExpired = $page->cleverreachConnectTokenExpiredAt - time();
 
-        if($timeToExpired < 86400)
-        {
+        if ($timeToExpired < 86400) {
             /** @var ApiManager $apiManager */
             $apiManager = Controller::getContainer()->get('Webandwork\ContaoCleverreachConnectorBundle\Api\ApiManager');
 
             /** @var array $accessToken */
             $result = $apiManager->getAccessToken($page->cleverreachConnectClientId, $page->cleverreachConnectClientSecret);
 
-            if($result['access_token'])
-            {
+            if ($result['access_token']) {
                 $page->cleverreachConnectToken = $result['access_token'];
-                $page->cleverreachConnectTokenExpiredAt = time() + (int)$result['expires_in'];
+                $page->cleverreachConnectTokenExpiredAt = time() + (int) $result['expires_in'];
                 $page->save();
             }
         }

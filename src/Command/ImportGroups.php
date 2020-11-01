@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\Command;
-
 
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\PageModel;
@@ -50,21 +49,21 @@ class ImportGroups extends Command
         /** @var PageModel $pageModel */
         $pageModel = PageModel::findById($rootPageId);
 
-        if(null === $pageModel)
-        {
+        if (null === $pageModel) {
             $io->error('Cant find given RootPageId, abort');
+
             return;
         }
 
-        if('root' !== $pageModel->type)
-        {
+        if ('root' !== $pageModel->type) {
             $io->error('Given Page is not Root-Type, abort');
+
             return;
         }
 
-        if('' === $pageModel->cleverreachConnectToken)
-        {
+        if ('' === $pageModel->cleverreachConnectToken) {
             $io->error('No CleverreacgToken isset, abort');
+
             return;
         }
 

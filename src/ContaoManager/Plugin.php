@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\ContaoManager;
-
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
@@ -27,7 +26,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface
         return [
             BundleConfig::create(ContaoCleverreachConnectorBundle::class)
                 ->setLoadAfter([
-                    ContaoCoreBundle::class
+                    ContaoCoreBundle::class,
                 ]),
         ];
     }
@@ -35,9 +34,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface
     /**
      * Allows a plugin to override extension configuration.
      *
-     * @param string           $extensionName
-     * @param array            $extensionConfigs
-     * @param ContainerBuilder $container
+     * @param string $extensionName
      *
      * @return array
      */
@@ -48,7 +45,6 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface
         }
 
         foreach ($extensionConfigs as &$extensionConfig) {
-
             // Add your custom "importer" channel
             if (isset($extensionConfig['channels'])) {
                 $extensionConfig['channels'][] = 'cleverreachConnect';
@@ -57,22 +53,21 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface
             }
 
             if (isset($extensionConfig['handlers'])) {
-
                 // Add your own handler before the "contao" handler
-                $offset = (int) array_search('contao', array_keys($extensionConfig['handlers']));
+                $offset = (int) array_search('contao', array_keys($extensionConfig['handlers']), true);
 
                 $extensionConfig['handlers'] = array_merge(
-                    array_slice($extensionConfig['handlers'], 0, $offset, true),
+                    \array_slice($extensionConfig['handlers'], 0, $offset, true),
                     [
                         'api' => [
                             'type' => 'rotating_file',
                             'max_files' => 10,
                             'path' => '%kernel.logs_dir%/%kernel.environment%_cleverreachConnect.log',
                             'level' => 'info',
-                            'channels' =>  ['cleverreachConnect'],
+                            'channels' => ['cleverreachConnect'],
                         ],
                     ],
-                    array_slice($extensionConfig['handlers'], $offset, null, true)
+                    \array_slice($extensionConfig['handlers'], $offset, null, true)
                 );
             }
         }

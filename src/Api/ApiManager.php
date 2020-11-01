@@ -1,16 +1,15 @@
 <?php
-/**
- * bundle.cleverreach-connect for Contao Open Source CMS
+
+/*
+ * WebAndWork GmbH Contao Cleverreach Connector
  *
- * Copyright (C) 2020 47GradNord - Agentur für Internetlösungen
+ * @copyright  Copyright (c) 2019-2020, WebAndWork GmbH
+ * @author     Holger Neuner <holger.neuner@webandwork.de>
  *
- * @license    commercial
- * @author     Holger Neuner
+ * @license LGPL-3.0-or-later
  */
 
-
 namespace Webandwork\ContaoCleverreachConnectorBundle\Api;
-
 
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
@@ -47,7 +46,6 @@ class ApiManager
     }
 
     /**
-     * @param string $token
      * @return array|null
      */
     public function getGroups(string $token)
@@ -56,15 +54,13 @@ class ApiManager
         $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => $token]);
         $response = $client->action('GET', '/groups');
 
-        if(0 === count($response))
-        {
+        if (0 === \count($response)) {
             return null;
         }
 
         $entitiys = [];
 
-        foreach($response as $group)
-        {
+        foreach ($response as $group) {
             $e = new Group();
             $e->setId($group['id']);
             $e->setName($group['name']);
@@ -80,8 +76,6 @@ class ApiManager
     }
 
     /**
-     * @param string $token
-     * @param int $groupId
      * @return array|null
      */
     public function getReceiverByGroup(string $token, int $groupId)
@@ -90,15 +84,13 @@ class ApiManager
         $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => $token]);
         $response = $client->action('GET', '/groups/'.$groupId.'/receivers');
 
-        if(0 === count($response))
-        {
+        if (0 === \count($response)) {
             return null;
         }
 
         $entitiys = [];
 
-        foreach($response as $receiver)
-        {
+        foreach ($response as $receiver) {
             $e = new Receiver();
             $e->setId($receiver['id']);
             $e->setEmail($receiver['email']);
@@ -111,5 +103,4 @@ class ApiManager
 
         return $entitiys;
     }
-
 }
