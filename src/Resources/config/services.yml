@@ -4,12 +4,24 @@ services:
         autoconfigure: true
         public: true
 
+    # Service ApiManager
     Webandwork\ContaoCleverreachConnectorBundle\Api\ApiManager:
         public: true
 
+    # Service GrouManager
+    Webandwork\ContaoCleverreachConnectorBundle\Service\GroupManager:
+        public: true
+
+    # Service Token Cron
     Webandwork\ContaoCleverreachConnectorBundle\Cron\RefreshCleverreachTokenCron:
         tags:
             -   name: contao.cronjob
                 interval: 0 */2 * * *
                 method: onEveryTwoHours
+
+    # Command Group Import
+    webandwork.cleverreach.command.importgroups:
+        class: Webandwork\ContaoCleverreachConnectorBundle\Command\ImportGroups
+        arguments:
+            - '@contao.framework'
 

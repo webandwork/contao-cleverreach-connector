@@ -14,6 +14,8 @@ namespace Webandwork\ContaoCleverreachConnectorBundle\Api;
 
 use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
+use Webandwork\ContaoCleverreachConnectorBundle\Api\Entity\Group;
+use Webandwork\ContaoCleverreachConnectorBundle\Api\Entity\Receiver;
 use Webandwork\ContaoCleverreachConnectorBundle\Api\Http\Guzzle;
 
 class ApiManager
@@ -44,12 +46,70 @@ class ApiManager
         return $response;
     }
 
-    public function getGroups()
+    /**
+     * @param string $token
+     * @return array|null
+     */
+    public function getGroups(string $token)
     {
         /** @var Guzzle $client */
-        $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjIwMTYifQ.eyJpc3MiOiJyZXN0LmNsZXZlcnJlYWNoLmNvbSIsImlhdCI6MTYwNDIxNDc3NCwiZXhwIjoxNjA2ODA2Nzc0LCJjbGllbnRfaWQiOjg2MDg1LCJzaGFyZCI6InNoYXJkOCIsInpvbmUiOjIsInVzZXJfaWQiOjAsImxvZ2luIjoib2F1dGgtVzVWTlRISXRpYSIsInJvbGUiOiJ1c2VyIiwic2NvcGVzIjoib2FfYmFzaWMgb2FfcmVjZWl2ZXJzIG9hX21haWxpbmdzIG9hX3doaXRlbGFiZWwiLCJpbmRlbnRpZmllciI6InN5c3RlbSIsImNhbGxlciI6NX0.ogPgwyWo59ErsOBK5tx-J59R4Ve7yYyfFWHbqiu-jWc']);
+        $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => $token]);
         $response = $client->action('GET', '/groups');
-        dump($response);
+
+        if(0 === count($response))
+        {
+            return null;
+        }
+
+        $entitiys = [];
+
+        foreach($response as $group)
+        {
+            $e = new Group();
+            $e->setId($group['id']);
+            $e->setName($group['name']);
+            $e->setTstamp($group['stamp']);
+            $e->setLastMailing($group['last_mailing']);
+            $e->setLastChanged($group['last_changed']);
+            $e->setIsLocked($group['isLocked']);
+
+            $entitiys[] = $e;
+        }
+
+        return $entitiys;
+    }
+
+    /**
+     * @param string $token
+     * @param int $groupId
+     * @return array|null
+     */
+    public function getReceiverByGroup(string $token, int $groupId)
+    {
+        /** @var Guzzle $client */
+        $client = new Guzzle($this->cleverreachConnectLogger, ['access_token' => $token]);
+        $response = $client->action('GET', '/groups/'.$groupId.'/receivers');
+
+        if(0 === count($response))
+        {
+            return null;
+        }
+
+        $entitiys = [];
+
+        foreach($response as $receiver)
+        {
+            $e = new Receiver();
+            $e->setId($receiver['id']);
+            $e->setEmail($receiver['email']);
+            $e->setActive($receiver['active']);
+            $e->setActivated($receiver['activated']);
+            $e->setDeactivated($receiver['deactivated']);
+            $e->setRegistered($receiver['registered']);
+            $entitiys[] = $e;
+        }
+
+        return $entitiys;
     }
 
 }
