@@ -13,7 +13,6 @@
     "php": "^7.2",
     "contao/core-bundle": "^4.9",
     "contao/newsletter-bundle": "^4.9",
-    "php-http/guzzle6-adapter": "~1.1",
     "guzzlehttp/guzzle": "~6.0"
   },
   "conflict": {
