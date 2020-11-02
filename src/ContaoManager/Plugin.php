@@ -17,6 +17,8 @@ use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ContainerBuilder;
 use Contao\ManagerPlugin\Config\ExtensionPluginInterface;
+use Contao\NewsletterBundle\ContaoNewsletterBundle;
+use Contao\NewsletterChannelModel;
 use Webandwork\ContaoCleverreachConnectorBundle\ContaoCleverreachConnectorBundle;
 
 class Plugin implements BundlePluginInterface, ExtensionPluginInterface
@@ -27,6 +29,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface
             BundleConfig::create(ContaoCleverreachConnectorBundle::class)
                 ->setLoadAfter([
                     ContaoCoreBundle::class,
+                    ContaoNewsletterBundle::class
                 ]),
         ];
     }
