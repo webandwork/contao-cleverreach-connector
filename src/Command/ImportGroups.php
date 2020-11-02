@@ -41,6 +41,8 @@ class ImportGroups extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->framework->initialize();
+
         $io = new SymfonyStyle($input, $output);
 
         /** @var int $rootPageId */
