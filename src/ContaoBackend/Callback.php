@@ -35,7 +35,7 @@ class Callback extends Backend
             return;
         }
 
-        if ('' !== $page->cleverreachConnectToken) {
+        if (null !== $page->cleverreachConnectToken) {
             return;
         }
 
